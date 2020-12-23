@@ -1,18 +1,18 @@
 AWSTemplateFormatVersion: 2010-09-09
-​
+
 Description: >
   This Cloudformation Template creates an infrastructure for Docker Swarm
   with five EC2 Instances with Amazon Linux 2. Instances are configured
   with custom security group allowing SSH (22), HTTP (80) UDP (4789, 7946), 
   and TCP(2377, 7946, 8080) connections from anywhere.
   User needs to select appropriate key name when launching the template.
-​
+
 Parameters:
   KeyPairName:
     Description: Enter the name of your Key Pair for SSH connections.
     Type: AWS::EC2::KeyPair::KeyName
     ConstraintDescription: Must one of the existing EC2 KeyPair
-​
+
 Resources:  
   RoleEnablingEC2forECR:
     Type: "AWS::IAM::Role"
@@ -172,7 +172,7 @@ Outputs:
       - PublicAddress: !GetAtt DockerInstance3.PublicDnsName
   4thDockerInstanceDNSName:
     Description: 4th Docker Instance DNS Name
-    Value: !Sub 
+    Value: !Sub
       - ${PublicAddress}
       - PublicAddress: !GetAtt DockerInstance4.PublicDnsName
   5thDockerInstanceDNSName:
@@ -180,3 +180,4 @@ Outputs:
     Value: !Sub 
       - ${PublicAddress}
       - PublicAddress: !GetAtt DockerInstance5.PublicDnsName
+  
